@@ -1,39 +1,31 @@
 <script>
-    import Nested from './Nested.svelte';
-
     let inputValue = "";
 
-    $: items = ["Buy Bread", "Eat Cheese"];
+    let items = ["Buy Bread", "Eat Cheese"];
 
     const addItem = () => {
         items.push(inputValue)
-        alert(items)
+        items = items
     }
 </script>
 
+<div class="container">
 
-<main>
-    <div class="container">
+    <h1 class="text-red-500">My Todos</h1>
 
-        <h1>My Todos</h1>
+    <input type="text" placeholder="add new item here..." bind:value="{inputValue}" />
+    <button type="button" on:click={addItem} class="blue" >add item</button>
 
-        <form on:submit={addItem}>
-            <input type="text" placeholder="add new item here..."
-                   bind:value="{inputValue}" />
-            <button type="submit">add item</button>
-        </form>
+    <ol id="TodoList">
+        {#each items as item}
+            <li>{item}</li>
+        {/each}
+    </ol>
 
-        <ol id="TodoList">
-            {#each items as item}
-                <li>{item}</li>
-            {/each}
-        </ol>
+</div>
 
-    </div>
-
-</main>
-
-<style>
-
-
+<style global lang="postcss">
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
 </style>
