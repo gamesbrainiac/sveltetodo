@@ -3,7 +3,8 @@
 
     let items = ["Buy Bread", "Eat Cheese"];
 
-    const addItem = () => {
+    const addItem = event => {
+        event.preventDefault()
         items.push(inputValue)
         items = items
     }
@@ -13,8 +14,10 @@
 
     <h1 class="text-red-500">My Todos</h1>
 
-    <input type="text" placeholder="add new item here..." bind:value="{inputValue}" />
-    <button type="button" on:click={addItem} class="blue" >add item</button>
+    <form on:submit={(event) => addItem(event)}>
+        <input type="text" placeholder="add new item here..." bind:value="{inputValue}" />
+        <button type="submit" class="btn btn-primary" >add item</button>
+    </form>
 
     <ol id="TodoList">
         {#each items as item}
